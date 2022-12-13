@@ -5,11 +5,11 @@ import numpy as np
 from time import sleep
 import time,threading
 
-k=0
 cap = cv2.VideoCapture(0)
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades+"haarcascade_frontalface_alt2.xml")
 
 def openvideo():
+    k=0
     if not cap.isOpened():
         print("Cannot open camera")
         exit()
@@ -31,7 +31,8 @@ def openvideo():
             elif compare==0:
                 print("not needcode")
             else:
-                threading.Thread(target=model_1()).start()  
+                threading.Thread(target=model_1()).start() 
+                k+=1 
             
         if cv2.waitKey(1) == ord('q'):
             break
@@ -40,7 +41,7 @@ def openvideo():
 
 def model_1():    
     print(205)  
-    k=1  
+    
     sound.sound()
 
 threading.Thread(target=openvideo()).start()     

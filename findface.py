@@ -29,16 +29,25 @@ def fface():
     img = cv2.imread("media/tem.jpg")
     gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray,1.1,3)
+    model = cv2.face.LBPHFaceRecognizer_create()
+    try:
+        model.read('faces_LBPH.yml')
+        f = open('member.txt',"r")
+        
+        names= f.readline().split((','))
+    except:
+        buildface.bface()
+
     for(x,y,w,h) in faces:
-        img1 = cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),3)
+        img = cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),3)
         face_img = cv2.resize(gray[y:y + h,x: x+w],(400,400))
-        model = cv2.face.LBPHFaceRecognizer_create()
+        
         try:
             val = model.predict(face_img)
             if val[1]<50:
                 print('welcom '+ names[val[0]]+' login!',val[1])
                 return 2
             else:
-                return 0
+                    return 0
         except:
             return 1
