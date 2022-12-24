@@ -55,7 +55,7 @@ def hand_pos(finger_angle):
     f4 = finger_angle[3]   # 無名指角度
     f5 = finger_angle[4]   # 小拇指角度
 
-    # 小於 50 表示手指伸直，大於等於 50 表示手指捲縮
+    
     if f1<50 and f2>=50 and f3>=50 and f4>=50 and f5>=50:
         return 'good'
     elif f1>=50 and f2>=50 and f3<50 and f4>=50 and f5>=50:
@@ -82,3 +82,26 @@ def hand_pos(finger_angle):
         return '5'
     else:
         return ''
+
+def hand_check(text):
+    with mp_hands.Hands(
+        model_complexity=0,
+        min_detection_confidence=0.5,
+        min_tracking_confidence=0.5) as hands:
+        w, h = 540, 310                                  
+        img = cv2.imread("media/hand.jpg")
+        img = cv2.resize(img, (w,h))                
+        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  
+        results = hands.process(img2)               
+        if results.multi_hand_landmarks:
+            for hand_landmarks in results.multi_hand_landmarks:
+                finger_points = []                   
+                for i in hand_landmarks.landmark:
+                    x = i.x*w
+                    y = i.y*h
+                    finger_points.append((x,y))
+                if finger_points:
+                    finger_angle = hand_angle(finger_points)                           
+                    text = hand_pos(finger_angle) 
+                    print(text) #text    
+                    break      
