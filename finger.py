@@ -88,17 +88,17 @@ def hand_check(text):
         model_complexity=0,
         min_detection_confidence=0.5,
         min_tracking_confidence=0.5) as hands:
-        w, h = 540, 310                                  
+        #w, h = 540, 310                                  
         img = cv2.imread("media/hand.jpg")
-        img = cv2.resize(img, (w,h))                
+        #img = cv2.resize(img, (w,h))                
         img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  
         results = hands.process(img2)               
         if results.multi_hand_landmarks:
             for hand_landmarks in results.multi_hand_landmarks:
                 finger_points = []                   
                 for i in hand_landmarks.landmark:
-                    x = i.x*w
-                    y = i.y*h
+                    x = i.x
+                    y = i.y
                     finger_points.append((x,y))
                 if finger_points:
                     finger_angle = hand_angle(finger_points)                           
