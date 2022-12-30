@@ -1,6 +1,7 @@
 import cv2
 import mediapipe as mp
 import math
+from time import sleep
 
 mp_drawing = mp.solutions.drawing_utils
 mp_drawing_styles = mp.solutions.drawing_styles
@@ -56,24 +57,15 @@ def hand_pos(finger_angle):
     f5 = finger_angle[4]   # 小拇指角度
 
     
-    if f1<50 and f2>=50 and f3>=50 and f4>=50 and f5>=50:
-        return 'good'
-    elif f1>=50 and f2>=50 and f3<50 and f4>=50 and f5>=50:
-        return 'no!!!'
-    elif f1<50 and f2<50 and f3>=50 and f4>=50 and f5<50:
-        return 'ROCK!'
-    elif f1>=50 and f2>=50 and f3>=50 and f4>=50 and f5>=50:
+    
+    if f1>=50 and f2>=50 and f3>=50 and f4>=50 and f5>=50:
         return '0'
-    elif f1>=50 and f2>=50 and f3>=50 and f4>=50 and f5<50:
-        return 'pink'
     elif f1>=50 and f2<50 and f3>=50 and f4>=50 and f5>=50:
         return '1'
     elif f1>=50 and f2<50 and f3<50 and f4>=50 and f5>=50:
         return '2'
     elif f1>=50 and f2>=50 and f3<50 and f4<50 and f5<50:
-        return 'ok'
-    elif f1<50 and f2>=50 and f3<50 and f4<50 and f5<50:
-        return 'ok'
+        return 'end' #OK
     elif f1>=50 and f2<50 and f3<50 and f4<50 and f5>50:
         return '3'
     elif f1>=50 and f2<50 and f3<50 and f4<50 and f5<50:
@@ -82,26 +74,29 @@ def hand_pos(finger_angle):
         return '5'
     else:
         return ''
-
-def hand_check(text):
+w, h = 540, 310
+def hand_check():
     with mp_hands.Hands(
         model_complexity=0,
         min_detection_confidence=0.5,
         min_tracking_confidence=0.5) as hands:
-        #w, h = 540, 310                                  
-        img = cv2.imread("media/hand.jpg")
-        #img = cv2.resize(img, (w,h))                
-        img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  
-        results = hands.process(img2)               
-        if results.multi_hand_landmarks:
-            for hand_landmarks in results.multi_hand_landmarks:
-                finger_points = []                   
-                for i in hand_landmarks.landmark:
-                    x = i.x
-                    y = i.y
-                    finger_points.append((x,y))
-                if finger_points:
-                    finger_angle = hand_angle(finger_points)                           
-                    text = hand_pos(finger_angle) 
-                    print(text) #text    
-                    break      
+        try:                                  
+            img = cv2.imread("media/hand.jpg")
+            img = cv2.resize(img, (w,h))                
+            img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  
+            results = hands.process(img2)
+        
+                       
+            if results.multi_hand_landmarks:
+                for hand_landmarks in results.multi_hand_landmarks:
+                    finger_points = []                   
+                    for i in hand_landmarks.landmark:
+                        x = i.x*w
+                        y = i.y*h
+                        finger_points.append((x,y))
+                    if finger_points:
+                        finger_angle = hand_angle(finger_points)                           
+                        text = hand_pos(finger_angle) 
+                        return(text) #text        
+        except:
+            return ' '
