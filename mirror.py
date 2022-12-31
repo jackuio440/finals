@@ -48,55 +48,62 @@ def openvideo():
             elif compare==0:
                 print("not pass")
             elif compare==2:
-                #threading.Thread(target=model_1).start()
+                threading.Thread(target=model_1).start()
                 threading.Thread(target=model_2).start() 
                 print("hello")
                 
                 k+=1 
                 print(k)
             else: 
-                k=0
-        
-
-        
-             
+                k=0  
         if cv2.waitKey(1) == ord('q'):
             break
             cap.release()
             cv2.destroyAllWindows()
 
-
+def model_1():
+    global snum
+    snum='0'
+    while True:
+        snum=sound.sound()
 def model_2():
+    global snum
     while True:
         text=finger.hand_check()
-        snum=sound.sound()
+        
         ti1=t.localtime()
         sTime=str(ti1.tm_mon)+"月"+str(ti1.tm_mday)+"日"+str(ti1.tm_hour)+"點"+str(ti1.tm_min)+"分"+str(ti1.tm_sec)+"秒 星期"+str(ti1.tm_wday+1)
         print(text)
+        with open('news.txt', 'r') as f:
+            z = f.read()
         if(text=="1" or snum=='1'):
-            f = open('num.txt','w')
-            f.write("1")
-            f.close()
-            newsFind.newsFind()
-            newsFind.newsRead()
+            if z !="1":
+                f = open('num.txt','w')
+                f.write("1")
+                f.close()
+                newsFind.newsFind()
+                newsFind.newsRead()
         elif(text=="2" or snum=='2'):
-            f = open('num.txt','w')
-            f.write("2")
-            f.close()
+            if z !="2":
+                f = open('num.txt','w')
+                f.write("2")
+                f.close()
             newsFind.newsFind()
             newsFind.newsRead_en()
         elif(text=="3"or snum=='3'):
-            f = open('num.txt','w')
-            f.write("3")
-            f.close()
+            if z !="3":
+                f = open('num.txt','w')
+                f.write("3")
+                f.close()
             mp3.musicpl()
         elif(text=="4"or snum=='4'):
-            f = open('num.txt','w')
-            f.write("4")
-            f.close()
-            youtube.news()
+            if z !="4":
+                f = open('num.txt','w')
+                f.write("4")
+                f.close()
+                youtube.news()
             
-        elif(text=="5")or snum=='5':
+        elif(text=="5" or snum=='5'):
             f = open('num.txt','w')
             f.write("5")
             f.close()
