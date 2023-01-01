@@ -10,6 +10,10 @@ from gtts import gTTS
 import mp3,youtube
 import pyttsx3
 
+'''with open('faces_LBPH.yml', 'r') as f:
+        k = f.read()
+if(k==""):
+    buildface.bface()'''
 cap = cv2.VideoCapture(0)
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades+"haarcascade_frontalface_alt2.xml")
 compare=''
@@ -62,18 +66,20 @@ def openvideo():
             cv2.destroyAllWindows()
 
 def model_1():
-    global snum
-    snum='0'
+    global snm
+    snm='0'
     while True:
-        snum=sound.sound()
+        snm=sound.sound()
+        print(snm)
 def model_2():
-    global snum
+    global snm
     while True:
         text=finger.hand_check()
-        
+        snum=snm
         ti1=t.localtime()
         sTime=str(ti1.tm_mon)+"月"+str(ti1.tm_mday)+"日"+str(ti1.tm_hour)+"點"+str(ti1.tm_min)+"分"+str(ti1.tm_sec)+"秒 星期"+str(ti1.tm_wday+1)
         print(text)
+        print(snum)
         with open('news.txt', 'r') as f:
             z = f.read()
         if(text=="1" or snum=='1'):
@@ -88,14 +94,14 @@ def model_2():
                 f = open('num.txt','w')
                 f.write("2")
                 f.close()
-            newsFind.newsFind()
-            newsFind.newsRead_en()
+                newsFind.newsFind()
+                newsFind.newsRead_en()
         elif(text=="3"or snum=='3'):
             if z !="3":
                 f = open('num.txt','w')
                 f.write("3")
                 f.close()
-            mp3.musicpl()
+                mp3.playmusic()
         elif(text=="4"or snum=='4'):
             if z !="4":
                 f = open('num.txt','w')

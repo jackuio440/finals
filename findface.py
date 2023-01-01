@@ -29,7 +29,7 @@ def fface():
         names= f.readline().split((','))
     except:
         return 1
-        buildface.bface()
+        
 
     for(x,y,w,h) in faces:
         img = cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),3)
