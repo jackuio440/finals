@@ -2,6 +2,7 @@ import cv2,os,glob
 import numpy as np
 from time import sleep
 def bface():
+
     def saveImg(image,index):
         filename="images/"+"/face{:03d}.jpg".format(index)
         cv2.imwrite(filename,image)
@@ -9,16 +10,17 @@ def bface():
     index=1
     total = 100
 
-
+    
     os.mkdir("images/")
     face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades+"haarcascade_frontalface_alt2.xml")
     cap = cv2.VideoCapture(0)
+    cv2.namedWindow('video',cv2.WINDOW_NORMAL)
     while index>0:
-            ret,frame = cap.read()
-            frame = cv2.flip(frame,1)
-            gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-            faces = face_cascade.detectMultiScale(gray,1.1,3)
-            for(x,y,w,h) in faces:
+        ret,frame = cap.read()
+        frame = cv2.flip(frame,1)
+        gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray,1.1,3)
+        for(x,y,w,h) in faces:
                 frame = cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),3)
                 image = cv2.resize(gray[y:y + h,x: x+w],(400,400))
                 saveImg(image,index)
@@ -29,11 +31,12 @@ def bface():
 
                     index = -1
                     break
-                
-                
-            cv2.imshow('video',frame)
-            cv2.waitKey(1)
-    cv2.destroyWindow('video')
+                    
+                    
+        cv2.imshow('video',frame)
+        cv2.waitKey(1)
+    cap.release()
+    cv2.destroyAllWindows()
     images=[]
     labels=[]
     labelstr=[]
@@ -49,8 +52,11 @@ def bface():
             labelstr.append(d)
             count += 1
 
+
     print("start create...")
     model = cv2.face.LBPHFaceRecognizer_create()
     model.train(np.asarray(images),np.asarray(labels))
     model.save('faces_LBPH.yml')
     print("create done!")
+
+

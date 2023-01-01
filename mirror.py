@@ -10,10 +10,7 @@ from gtts import gTTS
 import mp3,youtube
 import pyttsx3
 
-'''with open('faces_LBPH.yml', 'r') as f:
-        k = f.read()
-if(k==""):
-    buildface.bface()'''
+
 cap = cv2.VideoCapture(0)
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades+"haarcascade_frontalface_alt2.xml")
 compare=''

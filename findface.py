@@ -24,11 +24,9 @@ def fface():
     model = cv2.face.LBPHFaceRecognizer_create()
     try:
         model.read('faces_LBPH.yml')
-        f = open('member.txt',"r")
-        
-        names= f.readline().split((','))
     except:
         return 1
+        buildface.bface()
         
 
     for(x,y,w,h) in faces:
