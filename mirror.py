@@ -11,7 +11,7 @@ import mp3, youtube
 import pyttsx3
 
 
-cap = cv2.VideoCapture('IMG_6124.MOV')
+cap = cv2.VideoCapture('video.mp4')
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades+"haarcascade_frontalface_alt2.xml")
 compare = ''
 text = ''
