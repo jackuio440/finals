@@ -13,14 +13,14 @@ def vector_2d_angle(v1, v2):
     v2_x = v2[0]
     v2_y = v2[1]
     try:
-        angle_= math.degrees(math.acos((v1_x*v2_x+v1_y*v2_y)/(((v1_x**2+v1_y**2)**0.5)*((v2_x**2+v2_y**2)**0.5))))
+        angle_ = math.degrees(math.acos((v1_x*v2_x+v1_y*v2_y)/(((v1_x**2+v1_y**2)**0.5)*((v2_x**2+v2_y**2)**0.5))))
     except:
         angle_ = 180
     return angle_
 
 
 def hand_angle(hand_):
-    angle_list = []   
+    angle_list = []
     angle_ = vector_2d_angle(
         ((int(hand_[0][0])- int(hand_[2][0])),(int(hand_[0][1])-int(hand_[2][1]))),
         ((int(hand_[3][0])- int(hand_[4][0])),(int(hand_[3][1])- int(hand_[4][1])))
@@ -56,8 +56,8 @@ def hand_pos(finger_angle):
     f4 = finger_angle[3]   # 無名指角度
     f5 = finger_angle[4]   # 小拇指角度
 
-    
-    
+
+
     if f1>=50 and f2>=50 and f3>=50 and f4>=50 and f5>=50:
         return '0'
     elif f1>=50 and f2<50 and f3>=50 and f4>=50 and f5>=50:
@@ -80,23 +80,23 @@ def hand_check():
         model_complexity=0,
         min_detection_confidence=0.5,
         min_tracking_confidence=0.5) as hands:
-        try:                                  
+        try:
             img = cv2.imread("media/hand.jpg")
-            img = cv2.resize(img, (w,h))                
-            img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  
+            img = cv2.resize(img, (w,h))
+            img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
             results = hands.process(img2)
-        
-                       
+
+
             if results.multi_hand_landmarks:
                 for hand_landmarks in results.multi_hand_landmarks:
-                    finger_points = []                   
+                    finger_points = []
                     for i in hand_landmarks.landmark:
                         x = i.x*w
                         y = i.y*h
                         finger_points.append((x,y))
                     if finger_points:
-                        finger_angle = hand_angle(finger_points)                           
-                        text = hand_pos(finger_angle) 
-                        return(text) #text        
+                        finger_angle = hand_angle(finger_points)
+                        text = hand_pos(finger_angle)
+                        return(text) #text
         except:
             return ' '
