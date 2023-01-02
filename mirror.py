@@ -5,7 +5,7 @@ import numpy as np
 from time import sleep
 import time,threading,finger
 import time as t
-import newsFind
+import news_find
 from gtts import gTTS
 import mp3, youtube
 import pyttsx3
@@ -87,15 +87,15 @@ def model_2():
                 f = open('num.txt', 'w', encoding='utf8')
                 f.write("1")
                 f.close()
-                newsFind.newsFind()
-                newsFind.newsRead()
+                news_find.news_find()
+                news_find.newsRead()
         elif(text=="2" or snum=='2'):
             if z !="2":
                 f = open('num.txt', 'w', encoding='utf8')
                 f.write("2")
                 f.close()
-                newsFind.newsFind()
-                newsFind.newsRead_en()
+                news_find.news_find()
+                news_find.newsRead_en()
         elif(text=="3"or snum=='3'):
             if z !="3":
                 f = open('num.txt', 'w', encoding='utf8')
