@@ -1,6 +1,10 @@
 # 不紀錄多媒體的資料，以防Git掛掉
 __mpdlcache__/
 __mmdb__/
+media/
+music/
+news.txt
+num.txt
 *.mp4
 *.mp3
 *.vob
