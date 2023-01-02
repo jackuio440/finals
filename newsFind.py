@@ -45,35 +45,35 @@ def newsFind():
     divs2 = sp.find('div', 'e7-main-content')
     spans = divs2.find_all('span')
 
-    with open('news.txt', 'w+') as f:
+    with open('news.txt', 'w+', encoding='utf8') as f:
         for title in spans:
             print(title.text)
             f.write(str(title.text))
 
 def newsRead():
-        with open('news.txt', 'r') as f:
-            data = f.read()
-            engine = pyttsx3.init()
+    with open('news.txt', 'r', encoding='utf8') as f:
+        data = f.read()
+        engine = pyttsx3.init()
 
-            engine.setProperty('rate', 150)
-            engine.setProperty('volume', 0.9)
+        engine.setProperty('rate', 150)
+        engine.setProperty('volume', 0.9)
 
-            engine.say(data)
+        engine.say(data)
 
-            engine.runAndWait()
-            print(data)
-            print('------------------')
+        engine.runAndWait()
+        print(data)
+        print('------------------')
 
 
 def newsRead_en():
     """."""
 
-    with open('news.txt', 'r') as f:
+    with open('news.txt', 'r', encoding='utf8') as f:
         data = f.read()
 
     def google_translator(texts):
         translator = Translator()
-        return translator.translate(texts,dest="en").text
+        return translator.translate(texts, dest="en").text
 
     engine = pyttsx3.init()
     engine.setProperty('rate', 150)
