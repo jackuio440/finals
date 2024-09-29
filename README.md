@@ -1,32 +1,93 @@
-功能介紹
-面部識別登入
-程式在初次使用時建立一個個人的臉部模型，用來進行識別與登入。
-程式引用了OpenCV模組，透過鏡頭對使用者面部採樣建立模型，在主程式
-開啟時偵測並對比模型達到使用者登入的功能。
-語音操控
-使用者可以透過說出以下指令去達成基本操作：
-● 新聞－播報透過爬蟲得到的新聞
-● 英文新聞－播報英文翻譯過後的新聞
-● 音樂－播放已存在資料庫中的音樂
-● 直播－開啟一個Youtube新聞連播的直播
-● 嗨－播報現在時間並打聲招呼
-● 結束－結束辨識
-程式引用SpeechRecognition、PyAudio、gTTs等模組組合達成以上功能。
-手勢操控
-使用者可以透過手比出以下動作去達成基本操作：（可對比語音操控）
-● 1 － 播報透過爬蟲得到的新聞
-● 2 － 播報英文翻譯過後的新聞
-● 3 － 播放已存在資料庫中的音樂
-● 4 － 開啟一個Youtube新聞連播的直播
-● 5 － 播報現在時間並打聲招呼
-● ok － 結束辨識
-程式引用MediaPipe、OpenCV模組進行手勢識別與圖像識別達成操作。
-新聞播報、直播
-經過手勢或語音下達指令後執行，播報新聞上使用BeautifulSoup爬蟲ptt新
-聞網主頁的新聞標題與網址，以random的方式選取一篇新聞寫入文字檔中，再
-透過pyttx3模組讀出文字檔內容。
-另一項播報新聞的功能，以開啟網頁視窗的方式執行，直接轉至新聞連播平
-到播放新聞。
+# Facial Recognition Login System with Voice and Gesture Control
+
+This project implements a facial recognition login system, combined with voice and gesture controls to provide a hands-free and intuitive user experience. The system uses a variety of Python libraries to achieve these functionalities.
+
+## Features
+
+### 1. Facial Recognition Login
+The program allows users to log in via facial recognition. Upon first use, the program creates a facial model of the user using a webcam, which is stored and used for future logins.
+
+- **Library Used**: `OpenCV`
+- **Process**: 
+  - Captures images of the user's face through the webcam.
+  - Creates a model based on the images for facial recognition.
+  - Compares the user's face with the stored model each time the program is opened to authenticate and log in the user.
+
+### 2. Voice Control
+Users can execute basic commands by using their voice. The system supports the following commands:
+
+- **Commands**:
+  - `新聞` – Fetches and reads out news headlines gathered via web scraping.
+  - `英文新聞` – Fetches news headlines and reads out their English translations.
+  - `音樂` – Plays music from a pre-existing library.
+  - `直播` – Opens a live broadcast of YouTube news.
+  - `嗨` – Greets the user and announces the current time.
+  - `結束` – Ends the recognition session.
+  
+- **Libraries Used**:
+  - `SpeechRecognition`
+  - `PyAudio`
+  - `gTTS` (Google Text-to-Speech)
+
+### 3. Gesture Control
+Users can perform basic operations by making specific hand gestures in front of the webcam. The gesture commands mirror the voice control commands.
+
+- **Gestures**:
+  - `1` – Fetches and reads out news headlines.
+  - `2` – Fetches and reads out news translated into English.
+  - `3` – Plays music from the library.
+  - `4` – Opens a live broadcast of YouTube news.
+  - `5` – Greets the user and announces the current time.
+  - `ok` – Ends the recognition session.
+
+- **Libraries Used**:
+  - `MediaPipe`
+  - `OpenCV` 
+
+### 4. News Reporting & Live News Streaming
+News reporting and live streaming can be triggered via voice or gesture commands.
+
+- **News Reporting**: 
+  - The program uses web scraping (via `BeautifulSoup`) to fetch news headlines from the PTT news page. 
+  - Headlines and URLs are randomly selected and stored in a text file. The content is read aloud using the `pyttsx3` text-to-speech engine.
+  
+- **Live News Streaming**:
+  - The program opens a web browser and directly streams live news broadcasts from YouTube.
+
+## Setup and Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/facial-recognition-voice-gesture-control.git
+   ```
+2. Install the required dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Run the program:
+   ```bash
+   python main.py
+   ```
+
+## Dependencies
+
+- `OpenCV` – For facial and gesture recognition.
+- `SpeechRecognition`, `PyAudio`, `gTTS` – For voice recognition and text-to-speech functionality.
+- `MediaPipe` – For gesture recognition.
+- `BeautifulSoup` – For web scraping news headlines.
+- `pyttsx3` – For text-to-speech conversion.
+
+## Usage
+
+Once the program is running, users can log in through facial recognition and interact with the system using voice commands or hand gestures.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+--- 
+
+This README provides an overview of the project's key features, installation instructions, and usage guidelines.
 音樂播放
 經過手勢或語音下達指令後執行，使用pygamea模組播放音樂，音樂以資
 料夾的形式存放，每次下達播放指令時將會以隨機方式抽取一首歌播放。
