@@ -81,16 +81,6 @@ News reporting and live streaming can be triggered via voice or gesture commands
 
 Once the program is running, users can log in through facial recognition and interact with the system using voice commands or hand gestures.
 
-## License
-
-This project is licensed under the MIT License. See the `LICENSE` file for details.
-
 --- 
 
 This README provides an overview of the project's key features, installation instructions, and usage guidelines.
-音樂播放
-經過手勢或語音下達指令後執行，使用pygamea模組播放音樂，音樂以資
-料夾的形式存放，每次下達播放指令時將會以隨機方式抽取一首歌播放。
-打招呼時間播報
-經過手勢或語音下達指令後執行，進行一個簡單的打招呼並播報幾月幾日
-星期幾的資訊。
