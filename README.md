@@ -1,5 +1,9 @@
 # Facial Recognition Login System with Voice and Gesture Control
 
+## About
+
+A Python-based smart login system that combines facial recognition, voice commands, and hand gesture control. Designed to provide a fully hands-free experience — users can authenticate and control the application without touching a keyboard or mouse. Built with OpenCV, MediaPipe, SpeechRecognition, and BeautifulSoup.
+
 This project implements a facial recognition login system, combined with voice and gesture controls to provide a hands-free and intuitive user experience. The system uses a variety of Python libraries to achieve these functionalities.
 
 ## Features
